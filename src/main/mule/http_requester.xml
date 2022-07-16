@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="530dc9b4-f85c-4ed2-b4b5-311e2e9dc2d5" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="910d8904-35bf-4e2d-a20c-d728d8d4ea69" />
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="37e486ae-5743-408d-b126-c55349837818" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration1" doc:name="HTTP Request configuration" doc:id="d915e25e-e9b3-4211-890f-37880b53e829" />
+	<flow name="http_requesterFlow1" doc:id="1df65118-8874-49e0-bae9-a432a5005b13" >
+		<http:listener doc:name="Listener" doc:id="838d1d45-fcd5-40a9-86fa-e7e56f6a9cb2" config-ref="HTTP_Listener_config1" path="/sample"/>
+		<http:request method="POST" doc:name="Request" doc:id="0b7f6e24-ce9b-4bc5-b0f0-6958b03475ce" config-ref="HTTP_Request_configuration" url="https://dummy.restapiexample.com/api/v1/create"/>
+		<logger level="INFO" doc:name="Logger" doc:id="da512532-ed76-4d09-b528-ff1c6c4f7306" message="msg created successfully"/>
+	</flow>
+	<flow name="http_requesterFlow" doc:id="b2eb53d3-b1f6-4fb0-ba76-df2465795f8d" >
+		<http:listener doc:name="Listener" doc:id="b6f1cd5f-792a-4d9e-8f0b-261b8fc828aa" config-ref="HTTP_Listener_config" path="/test"/>
+		<http:request method="GET" doc:name="Request" doc:id="b64c541c-7111-46b5-88e7-f3bb6feee48f" config-ref="HTTP_Request_configuration" url="http://dummy.restapiexample.com/api/v1/employees"/>
+		<logger level="INFO" doc:name="Logger" doc:id="34d74f98-c273-4748-9b8f-a32d4bde1c50" message="Given API called successfully"/>
+	</flow>
+</mule>
